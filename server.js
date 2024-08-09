@@ -20,9 +20,6 @@ quotesRouter.get("/random", (req, res, next) => {
 
 //Get quote
 quotesRouter.get("/", (req, res, next) => {
-  if (!req.query.person) {
-    res.send({ quotes: quotes });
-  }
   if (req.query.person) {
     const filteredQuotes = quotes.filter(
       (quote) => quote["person"] === req.query.person
@@ -32,6 +29,8 @@ quotesRouter.get("/", (req, res, next) => {
     } else {
       res.status(404).send();
     }
+  } else {
+    res.send({ quotes: quotes });
   }
 });
 
